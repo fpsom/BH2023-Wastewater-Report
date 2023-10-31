@@ -13,7 +13,7 @@ authors:
   - name: Ivan Topolsky
     orcid: 0000-0002-7561-0810
     affiliation: 2
- - name: Amy Heather Fitzpatrick
+  - name: Amy Heather Fitzpatrick
     orcid: 0000-0002-1883-0489
     affiliation: 3
   - name: Gabriele Leoni
@@ -24,9 +24,9 @@ affiliations:
     index: 1
   - name: Computational Biology Group, SIB Swiss Institute of Bioinformatics, Basel,Switzerland
     index: 2
- - name: University College Dublin
+  - name: University College Dublin
     index: 3
- - name: European Commission, Joint Research Centre (JRC), Ispra, Italy
+  - name: European Commission, Joint Research Centre (JRC), Ispra, Italy
     index: 4
 date: 3 November 2023
 cito-bibliography: paper.bib
@@ -36,7 +36,7 @@ biohackathon_url:   "https://biohackathon-europe.org/"
 biohackathon_location: "Barcelona, Spain, 2023"
 group: Wastewater Surveillance
 # URL to project git repo --- should contain the actual paper.md:
-git_url: https://github.com/fpsom/BH2023-Wastewater-Report
+git_url: https://github.com/fpsom/BH2022-Wastewater-Report
 # This is the short authors description that is used at the
 # bottom of the generated paper (typically the first two authors):
 authors_short: Fotis Psomopoulos & Ivan Topolsky \emph{et al.}
