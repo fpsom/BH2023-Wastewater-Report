@@ -97,7 +97,7 @@ Number |  Metadata name |  Metadata Description |  Metadata Type
 23 | Size of the catchment area | Refers to the size of the area that is drained by the sampled sewage system in square km. | Number
 24 | Population size of the catchment area | Refers to the number of people living in the area covered by the sewage system | Number
 
-For each metadata, an indication of whether it’s considered *necessary*, *optional* (i.e. good to have but not critical), or *not required* (i.e. don’t care / don’t need) is expected. Finally, there is the option of adding, as structured text, any other metadata that might be considered in the form of `<metadata name>:<metadata description>:<required/optional>`.
+For each metadata, an indication of whether it’s considered **necessary**, **optional** (i.e. good to have but not critical), or **not required** (i.e. don’t care / don’t need) is expected. Finally, there is the option of adding, as structured text, any other metadata that might be considered in the form of `<metadata name>:<metadata description>:<required/optional>`.
 
 ## Wastewater analysis results
 
@@ -145,13 +145,13 @@ The LIMBO workflow addresses a critical need in the field of wastewater based ep
 The survey was circulated across various networks, including the [ELIXIR 
 Wastewater Surveillance Working Group](https://www.covid19dataportal.org/partners?activeTab=Working%20groups), as well as through social media, receiving approx. 21 responses within 48 hours. A preliminary analysis of these results yield the following insights:
 
-1. There is significant variation in the perception of the significance of the various metadata fields, with the vast majority of them fluctuating between *necessary* and *optional*.
-2. `Collection date` (100%), `Geographic location (country and/or sea)` (80.95%) and `Sewage type Description` (80.95%) had the strongest indicators, with over 80% of the responses identifying them as *necessary*.
-3. No metadata were consistently identified as *not required*. `Sample storage location` had the strongest response in this category with 42.86% responding as such, followed by `Sample transportation time` (38.10%), `Receipt date` (33.33%), `Sample transportation date` (28.57%) and `Sample transportation temperature` (19.05%).
+1. There is significant variation in the perception of the significance of the various metadata fields, with the vast majority of them fluctuating between **necessary** and **optional**.
+2. `Collection date` (100%), `Geographic location (country and/or sea)` (80.95%) and `Sewage type Description` (80.95%) had the strongest indicators, with over 80% of the responses identifying them as **necessary**.
+3. No metadata were consistently identified as **not required**. `Sample storage location` had the strongest response in this category with 42.86% responding as such, followed by `Sample transportation time` (38.10%), `Receipt date` (33.33%), `Sample transportation date` (28.57%) and `Sample transportation temperature` (19.05%).
 
 Finally, the following additional metadata were suggested (grouped conceptually per theme):
 
-*Reporters*
+**Reporters**
 
 - `authors: those contributing to the sample prep and processing: optional`
 - `collecting lab: lab in charge of sample collection: required`
@@ -159,13 +159,13 @@ Finally, the following additional metadata were suggested (grouped conceptually 
 - `sequencing lab: if different from reporting lab, facility where sequencing was performed: optional`
 - `lab: lab(s) where the samples were analysed:optional`
 
-*Library Prep*
+**Library Prep**
 
 - `sequencing purpose: e.g. surveillance : required`
 - `library preparation kit: kit to prepare sample for sequencing: required`
 - `sequencing technology: sequencer name: required`
 
-*Water stuff*
+**Water stuff**
 
 - `catchment geography:a geojson file describing the catchment area:optional`
 - `residence time: average/majority time samples take from shedding to the sampling site: necessary`
@@ -176,19 +176,16 @@ Finally, the following additional metadata were suggested (grouped conceptually 
 - `sampling approach: e.g. 24h autosampler, passive sampler, grab sampling: necessary`
 - `normalization_markers: proxies for human fecal shedding such as oxygen, nitrogen concentration, or PmmV:optional`
 
-*NGS data*
+**NGS data**
 
 - `sample name: some name give to the sample (any guidelines?): required`
 - `raw dataset embargo: if raw dataset should be openly shared only after some embargo date: optional`
 - `quality_flag: possibility to flag entries as low quality/invalid:optional`
 
 
-
-
 # Discussion 
 
 With regards to wastewater sequencing archives metadata, users have a variety opinions on the necessary or optional data points. The issue is to bring data sharers on board with any updates to required metadata as different studies may not collect the same data points. The Elixir Wastewater COVID-19 working group will be used to facilitate future conversations around this results? Secondary to this is the identification of minimum reporting standards for wastewater based epidemiology (MIWPE). A formal statement from the community through scientific consortiums or publications could established MIWBE for future publications and this data could be captured as part of the SRA/ENA upload process. 
-
 
 
 ## Acknowledgements
