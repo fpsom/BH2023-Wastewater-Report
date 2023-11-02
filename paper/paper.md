@@ -58,32 +58,21 @@ pasting above link (or yours) in
 
 # Introduction
 
+Wastewater-Based Epidemiology (WBE) holds significant promise as an early-warning system for various pathogens, with the potential to contribute to public health ([@. While considerable wet-lab efforts have been dedicated to this field, its limits and actual potential remain undefined when viewed from a dry-lab perspective.
 
-Wastewater-Based Epidemiology (WBE) began to flourish in 2001 and was initially used for the detection of illegal drugs. Historically though, around the 1950's WBE was implemented for the detection of infectious diseases, when the first studies to detect poliovirus and enteroviruses in sewage samples were conducted. These studies were based on the fact that since viruses cannot grow outside of host cells, they lose the ability to evolve in wastewater, and thus the concentration values that were found in sewages are related to those that were initially egested by the population.
+Wastewater influent into a Wastewater Treatment Plant (WWTP) is a complex mixture of sewage from the catchment area, encompassing a diverse array of nucleic acid originating from Eukaryotic, Prokaryotic, and Viral organisms. Although the precise composition of wastewater remains poorly documented, it has been established that these microbial communities are highly fragmented. Additionally, Viral organisms are found in lower relative abundance compared to their Prokaryotic counterparts, primarily due to their smaller genomic size. These characteristics pose unique challenges for dry-lab and bioinformatic analysis.
 
-During the COVID-19 pandemic WBE became a community-wide monitoring tool which provided real-time data concerning both public health status, environmental monitoring as well as food safety. Moreover, in addition to the traditional wastewater surveillance metrics that rely on biochemical indicators, the pandemic led to the increased use of high-throughput sequencing data on wastewater samples. This led to a number of key challenges and questions in the field, ranging from the data capture efforts through biosensors, until the data management and data analysis efforts
+Furthermore, the variability of wastewater samples across seasons, geographical locations, and days of the week adds another layer of complexity. The choice of wet-lab preparation methods and High Throughput Sequencing (HTS) techniques has been shown to impact the detection of specific microorganisms. Taking all of these components into account, it is clear that there are likley challenges in detecting and characterising the ground-truth in this sample type. 
 
-The main goal of this project was to define a framework for addressing specific health policy-related questions based on multi-modal wastewater surveillance, including a critical review on the applicable standards for (meta)data. The effort continued on the outputs of the relevant BH2022 project on wastewater surveillance [@ref? ], as well as on the collective expertise of the [ELIXIR Wastewater Surveillance Working Group](https://www.covid19dataportal.org/partners?activeTab=Working%20groups). Ultimately, the proposed framework will be demonstrated using existing publicly available data.
-
-
-# Considerations around defining the biological composition of wastewater
+As a response to these challenges, our biohackathon project is dedicated to exploring the potential of WBE in addressing specific biological questions. Our approach involves reviewing metadata associated with various read archieve wastewater sequencing data uploads and developing a prototype workflow to assess the accuracy of Antimicrobial Resistance (AMR) detection in wastewater. This research aims to shed light on the full capabilities and limitations of Wastewater-Based Epidemiology from a dry-lab perspective. The end-goal is a workflow that permits novice users to establish the probability of detecting their specific ground-truth in a shotugn metagenomics wastewater sequencing dataset.
 
 
 
 
-# Metadata for wastewater sequence data
 
-We identified a list of relevant information that, to us, are necessary to properly compare the results of wastewater analyses and/or to assess wastewater workflows robustness and reproducibility. These are:
+# Metadata standards for wastewater HTS data upload
 
-Amplicon probe map (version) (e.g.: inserts or primers bedfile)
-Sequencing coverage
-QC performed (i.e., filter used on raw reads, whether reads deduplication steps were included or not -> it affects variant calling)
-Variant caller used (e.g., GATK4 HaplotypeCaller cannot call variants with Allele Freq < 0.5, LowFreq on the opposite can, but has higher false positive rates, ShoRAH/VILOCA is more resilient at low-frequencies)
-Version of the lineages database used (in case Pangolin/Freyja/Others were used)
-
-In order to do a community-driven review of the metadata that are 
-
-In order to identify the key metadata that should be used during the deposition of NGS data generated after sequencing wastewater samples, with a goal of finding an optimal point of alignment across the various major deposition databases (such as SRA and ENA), we designed and run a short community survey (https://ec.europa.eu/eusurvey/runner/ELIXIR-BH2023-Project31) with the following questions (please note that these are a minor adaptation of the ENA checklist https://www.ebi.ac.uk/ena/browser/view/ERC000036):
+To collectively address the challenge of harmonizing metadata for NGS data generated from sequencing wastewater samples across major deposition databases (such as SRA and ENA), we conducted a community survey. The objective of this survey was to identify the essential metadata that should be included during the deposition of NGS data and to establish a common alignment point. The [survey]((https://ec.europa.eu/eusurvey/runner/ELIXIR-BH2023-Project31)) featured questions adapted from the ENA checklist (please note that these questions are a slight modification of the ENA checklist available at [link](https://www.ebi.ac.uk/ena/browser/view/ERC000036)). The questions can be viewed in the table below. 
 
 
 Number |  Metadata name |  Metadata Description |  Metadata Type 
@@ -113,6 +102,37 @@ Number |  Metadata name |  Metadata Description |  Metadata Type
 23 | Size of the catchment area | Refers to the size of the area that is drained by the sampled sewage system in square km. | Number
 24 | Population size of the catchment area | Refers to the number of people living in the area covered by the sewage system | Number
 
+
+
+We have compiled a list of critical information that we consider essential for facilitating a thorough comparison of wastewater analysis results and evaluating the robustness and reproducibility of wastewater workflows. These key metadata points include:
+
+- Amplicon probe map (version) (e.g., inserts or primers bedfile)
+- Quality control measures performed (e.g., filters applied to raw reads, inclusion of read deduplication steps, which can impact variant calling)
+- Sequencing coverage
+- Variant caller used (e.g., GATK4 HaplotypeCaller, which cannot call variants with Allele Frequency < 0.5, versus LowFreq, which can, but has higher false positive rates, and ShoRAH/VILOCA, known for its resilience at low frequencies)
+- Version of the lineages database used (relevant if Pangolin, Freyja, or other tools were employed)
+
+# LIMBO - Low Input Microbial Biological Observations workflow
+One of the greater challenges working with wastewater sequencing data is determining at what frequency/coverage of detection can the user/analyst have confidence in results. In this case, we propose a workflow LIMBO, which permits the user to generate scenarios of low input microbial presence and incorporate end-points for classification accuracy such as taxonomic classification, detection of Single Nucleotide Variants (SNVs) or identification of novel taxa/variants/lineages. The output is a measure of the ground-truth as a probability. 
+
+For this prototype we have taken shotgun metagenomics sequencing of wastewater for Antimicrobial Resistence (AMR) detection as a case-study. 
+
+Proposed workflow: 
+User data input with varying parameters
+Sequencing method  -”amplicon”, “shotgun_metagenomics”, “metatranscriptomics”
+Read length (short / long)
+Sequencing strategy (Paired-End / Single-End )
+Distribution of taxa within a multi fasta e.g “normal”, “beta” etc
+Taxa relative abundance (Provided in reads percentages, coverage values, relative proportions or read counts) 
+Path to input fasta file(s)
+Simulation of HTS data using MeSS (able to take into account all user data 
+parameter mentioned above)
+Possibility to generate multiple replicates from the same input set using a normal distribution and a standard deviation parameter
+Post sequencing processing determined by sequencing input 
+Shotgun metagenomics - Alignment approach
+Shotgun metagenomics - SPades assembly
+End-point detection - AMR genes/plasmids with AMRFinderPlus, Abricate, CARD
+Output - probability of obtaining ground-truth
 
 ## Acknowledgements
 
