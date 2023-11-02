@@ -7,14 +7,11 @@ authors:
   - name: Fotis Psomopoulos
     orcid: 0000-0002-8021-9162
     affiliation: 1
-  - name: Konstantinos Kyritsis
-    orcid: 0000-0001-8035-341X
-    affiliation: 1
+ - name: Amy Heather Fitzpatrick
+    orcid: 0000-0002-1883-0489
+    affiliation: 2
   - name: Ivan Topolsky
     orcid: 0000-0002-7561-0810
-    affiliation: 2
-  - name: Amy Heather Fitzpatrick
-    orcid: 0000-0002-1883-0489
     affiliation: 3
   - name: Gabriele Leoni
     orcid: 0000-0002-4899-5284
@@ -22,11 +19,11 @@ authors:
 affiliations:
   - name: Institute of Applied Biosciences, Centre for Research and Technology Hellas, Thessaloniki, Greece
     index: 1
-  - name: Computational Biology Group, SIB Swiss Institute of Bioinformatics, Basel,Switzerland
+ - name: University College Dublin
     index: 2
-  - name: University College Dublin
+  - name: Computational Biology Group, SIB Swiss Institute of Bioinformatics, Basel,Switzerland
     index: 3
-  - name: European Commission, Joint Research Centre (JRC), Ispra, Italy
+ - name: European Commission, Joint Research Centre (JRC), Ispra, Italy
     index: 4
 date: 3 November 2023
 cito-bibliography: paper.bib
@@ -36,10 +33,10 @@ biohackathon_url:   "https://biohackathon-europe.org/"
 biohackathon_location: "Barcelona, Spain, 2023"
 group: Wastewater Surveillance
 # URL to project git repo --- should contain the actual paper.md:
-git_url: https://github.com/fpsom/BH2022-Wastewater-Report
+git_url: https://github.com/fpsom/BH2023-Wastewater-Report
 # This is the short authors description that is used at the
 # bottom of the generated paper (typically the first two authors):
-authors_short: Fotis Psomopoulos & Ivan Topolsky \emph{et al.}
+authors_short: Fotis Psomopoulos & Amy H. Fitzpatrick \emph{et al.}
 ---
 
 
@@ -58,19 +55,18 @@ pasting above link (or yours) in
 
 # Introduction
 
-Wastewater-Based Epidemiology (WBE) holds significant promise as an early-warning system for various pathogens, with the potential to contribute to public health ([@. While considerable wet-lab efforts have been dedicated to this field, its limits and actual potential remain undefined when viewed from a dry-lab perspective.
+Wastewater-Based Epidemiology (WBE) holds significant promise as an early-warning system for various pathogens, with the potential to contribute to public health ([@choi_2018], [@spurbeck_2021]). While considerable wet-lab efforts have been dedicated to this field, its limits and actual potential remain undefined when viewed from a dry-lab perspective.
 
-Wastewater influent into a Wastewater Treatment Plant (WWTP) is a complex mixture of sewage from the catchment area, encompassing a diverse array of nucleic acid originating from Eukaryotic, Prokaryotic, and Viral organisms. Although the precise composition of wastewater remains poorly documented, it has been established that these microbial communities are highly fragmented. Additionally, Viral organisms are found in lower relative abundance compared to their Prokaryotic counterparts, primarily due to their smaller genomic size. These characteristics pose unique challenges for dry-lab and bioinformatic analysis.
+Wastewater influent into a Wastewater Treatment Plant (WWTP) is a complex mixture of sewage from the catchment area, encompassing a diverse array of nucleic acid originating from Eukaryotic, Prokaryotic, and Viral organisms. Although the precise composition of wastewater remains poorly documented, it has been established that these microbial communities are highly fragmented ([@ho_2022])). Additionally, Viral organisms are found in lower relative abundance compared to their Prokaryotic counterparts, primarily due to their smaller genomic size. These characteristics pose unique challenges for dry-lab and bioinformatic analysis.
 
-Furthermore, the variability of wastewater samples across seasons, geographical locations, and days of the week adds another layer of complexity. The choice of wet-lab preparation methods and High Throughput Sequencing (HTS) techniques has been shown to impact the detection of specific microorganisms. Taking all of these components into account, it is clear that there are likley challenges in detecting and characterising the ground-truth in this sample type. 
+Furthermore, the variability of wastewater samples across seasons, geographical locations, and days of the week adds another layer of complexity. The choice of wet-lab preparation methods and High Throughput Sequencing (HTS) techniques has been shown to impact the detection of specific microorganisms ([@polo_2020]. Taking all of these components into account, it is clear that there are likely challenges in detecting and characterising the ground-truth in this sample type. 
 
-As a response to these challenges, our biohackathon project is dedicated to exploring the potential of WBE in addressing specific biological questions. Our approach involves reviewing metadata associated with various read archieve wastewater sequencing data uploads and developing a prototype workflow to assess the accuracy of Antimicrobial Resistance (AMR) detection in wastewater. This research aims to shed light on the full capabilities and limitations of Wastewater-Based Epidemiology from a dry-lab perspective. The end-goal is a workflow that permits novice users to establish the probability of detecting their specific ground-truth in a shotugn metagenomics wastewater sequencing dataset.
-
-
-
+As a response to these challenges, our biohackathon project is dedicated to exploring the potential of WBE in addressing specific biological questions. Our approach involves reviewing metadata associated with various read archives wastewater sequencing data uploads and developing a prototype workflow to assess the accuracy of Antimicrobial Resistance (AMR) detection in wastewater. This research aims to shed light on the full capabilities and limitations of Wastewater-Based Epidemiology from a dry-lab perspective. The end-goal is a workflow that permits novice users to establish the probability of detecting their specific ground-truth in a shotgun metagenomics wastewater sequencing dataset.
 
 
 # Metadata standards for wastewater HTS data upload
+
+## Raw sequencing data
 
 To collectively address the challenge of harmonizing metadata for NGS data generated from sequencing wastewater samples across major deposition databases (such as SRA and ENA), we conducted a community survey. The objective of this survey was to identify the essential metadata that should be included during the deposition of NGS data and to establish a common alignment point. The [survey]((https://ec.europa.eu/eusurvey/runner/ELIXIR-BH2023-Project31)) featured questions adapted from the ENA checklist (please note that these questions are a slight modification of the ENA checklist available at [link](https://www.ebi.ac.uk/ena/browser/view/ERC000036)). The questions can be viewed in the table below. 
 
@@ -102,7 +98,9 @@ Number |  Metadata name |  Metadata Description |  Metadata Type
 23 | Size of the catchment area | Refers to the size of the area that is drained by the sampled sewage system in square km. | Number
 24 | Population size of the catchment area | Refers to the number of people living in the area covered by the sewage system | Number
 
+For each metadata, an indication of whether it’s considered *necessary*, *optional* (i.e. good to have but not critical), or *not required* (i.e. don’t care / don’t need) is expected. Finally, there is the option of adding, as structured text, any other metadata that might be considered in the form of `<metadata name>:<metadata description>:<required/optional>`.
 
+## Wastewater analysis results
 
 We have compiled a list of critical information that we consider essential for facilitating a thorough comparison of wastewater analysis results and evaluating the robustness and reproducibility of wastewater workflows. These key metadata points include:
 
@@ -113,26 +111,83 @@ We have compiled a list of critical information that we consider essential for f
 - Version of the lineages database used (relevant if Pangolin, Freyja, or other tools were employed)
 
 # LIMBO - Low Input Microbial Biological Observations workflow
-One of the greater challenges working with wastewater sequencing data is determining at what frequency/coverage of detection can the user/analyst have confidence in results. In this case, we propose a workflow LIMBO, which permits the user to generate scenarios of low input microbial presence and incorporate end-points for classification accuracy such as taxonomic classification, detection of Single Nucleotide Variants (SNVs) or identification of novel taxa/variants/lineages. The output is a measure of the ground-truth as a probability. 
+Working with wastewater sequencing data poses a significant challenge: determining the level of detection confidence based on the frequency and coverage of microbial presence. In response to this challenge, we introduce the LIMBO workflow, a versatile tool that allows users and analysts to explore scenarios of low-input microbial presence while evaluating classification accuracy. The workflow includes taxonomic classification, detection of Single Nucleotide Variants (SNVs), and identification of novel taxa, variants, and lineages. The primary outcome is a quantifiable measure of ground-truth as a probability.
 
-For this prototype we have taken shotgun metagenomics sequencing of wastewater for Antimicrobial Resistence (AMR) detection as a case-study. 
+## Case Study: Antimicrobial Resistance Detection
+In this prototype, we focus on the application of LIMBO to shotgun metagenomics sequencing of wastewater for Antimicrobial Resistance (AMR) detection.
+### Simulation of HTS Data
 
-Proposed workflow: 
-User data input with varying parameters
-Sequencing method  -”amplicon”, “shotgun_metagenomics”, “metatranscriptomics”
-Read length (short / long)
-Sequencing strategy (Paired-End / Single-End )
-Distribution of taxa within a multi fasta e.g “normal”, “beta” etc
-Taxa relative abundance (Provided in reads percentages, coverage values, relative proportions or read counts) 
-Path to input fasta file(s)
-Simulation of HTS data using MeSS (able to take into account all user data 
-parameter mentioned above)
-Possibility to generate multiple replicates from the same input set using a normal distribution and a standard deviation parameter
-Post sequencing processing determined by sequencing input 
-Shotgun metagenomics - Alignment approach
-Shotgun metagenomics - SPades assembly
-End-point detection - AMR genes/plasmids with AMRFinderPlus, Abricate, CARD
-Output - probability of obtaining ground-truth
+    Use a synthetic simulation tool such as MeSS ([@mess_2023]) or NEAT ([@neat_2016]) to simulate High-Throughput Sequencing (HTS) data.
+
+### Replicate Generation
+
+    Optionally, generate multiple replicates from the same input set using a normal distribution and a standard deviation parameter.
+
+### Post Sequencing Processing
+
+    Depending on the type of sequencing input (e.g., shotgun metagenomics), apply the appropriate post-sequencing processing methods, such as alignment approaches and SPAdes assembly.
+    Conduct end-point detection of AMR genes and plasmids using tools like AMRFinderPlus, Abricate, and CARD.
+
+### Output
+
+    Obtain the probability of successfully obtaining ground-truth data.
+
+### Justification:
+
+The LIMBO workflow addresses a critical need in the field of wastewater based epidemiology. It provides a systematic approach for assessing the accuracy of microbial detection under various conditions. By simulating HTS data and evaluating classification accuracy, LIMBO will empowers researchers to make informed decisions and enhances the reliability of results. 
+
+# Results
+
+## Metadata survey (preliminary) analysis
+
+The survey was circulated across various networks, including the [ELIXIR 
+Wastewater Surveillance Working Group](https://www.covid19dataportal.org/partners?activeTab=Working%20groups), as well as through social media, receiving approx. 21 responses within 48 hours. A preliminary analysis of these results yield the following insights:
+
+1. There is significant variation in the perception of the significance of the various metadata fields, with the vast majority of them fluctuating between *necessary* and *optional*.
+2. `Collection date` (100%), `Geographic location (country and/or sea)` (80.95%) and `Sewage type Description` (80.95%) had the strongest indicators, with over 80% of the responses identifying them as *necessary*.
+3. No metadata were consistently identified as *not required*. `Sample storage location` had the strongest response in this category with 42.86% responding as such, followed by `Sample transportation time` (38.10%), `Receipt date` (33.33%), `Sample transportation date` (28.57%) and `Sample transportation temperature` (19.05%).
+
+Finally, the following additional metadata were suggested (grouped conceptually per theme):
+
+*Reporters*
+
+- `authors: those contributing to the sample prep and processing: optional`
+- `collecting lab: lab in charge of sample collection: required`
+- `reporting lab: lab in charge of processing the sample and performing sequencing (or outsourcing it): required`
+- `sequencing lab: if different from reporting lab, facility where sequencing was performed: optional`
+- `lab: lab(s) where the samples were analysed:optional`
+
+*Library Prep*
+
+- `sequencing purpose: e.g. surveillance : required`
+- `library preparation kit: kit to prepare sample for sequencing: required`
+- `sequencing technology: sequencer name: required`
+
+*Water stuff*
+
+- `catchment geography:a geojson file describing the catchment area:optional`
+- `residence time: average/majority time samples take from shedding to the sampling site: necessary`
+- `flow: daily flow volume of wastewater upstream from the sampling site:optional`
+- `WaterFlow: Volume of WW processed by the plant during the sampling date:required`
+- `RainData: mean/median (?) volume of rain (mL/cm2) from the catchment area. It can affect sensitivity: optional`
+- `WaterFlow:Volume of WW processed the day of that sampling: required`
+- `sampling approach: e.g. 24h autosampler, passive sampler, grab sampling: necessary`
+- `normalization_markers: proxies for human fecal shedding such as oxygen, nitrogen concentration, or PmmV:optional`
+
+*NGS data*
+
+- `sample name: some name give to the sample (any guidelines?): required`
+- `raw dataset embargo: if raw dataset should be openly shared only after some embargo date: optional`
+- `quality_flag: possibility to flag entries as low quality/invalid:optional`
+
+
+
+
+# Discussion 
+
+With regards to wastewater sequencing archives metadata, users have a variety opinions on the necessary or optional data points. The issue is to bring data sharers on board with any updates to required metadata as different studies may not collect the same data points. The Elixir Wastewater COVID-19 working group will be used to facilitate future conversations around this results? Secondary to this is the identification of minimum reporting standards for wastewater based epidemiology (MIWPE). A formal statement from the community through scientific consortiums or publications could established MIWBE for future publications and this data could be captured as part of the SRA/ENA upload process. 
+
+
 
 ## Acknowledgements
 
