@@ -185,7 +185,7 @@ Finally, the following additional metadata were suggested (grouped conceptually 
 
 # Discussion 
 
-With regards to wastewater sequencing archives metadata, users have a variety opinions on the necessary or optional data points. The issue is to bring data sharers on board with any updates to required metadata as different studies may not collect the same data points. The Elixir Wastewater COVID-19 working group will be used to facilitate future conversations around this results? Secondary to this is the identification of minimum reporting standards for wastewater based epidemiology (MIWPE). A formal statement from the community through scientific consortiums or publications could established MIWBE for future publications and this data could be captured as part of the SRA/ENA upload process. 
+With regards to wastewater sequencing archives metadata, users have a variety opinions on the necessary or optional data points. The issue is to bring data sharers on board with any updates to required metadata as different studies may not collect the same data points. Moving forward, the [ELIXIR Wastewater Surveillance Working Group working group](https://www.covid19dataportal.org/partners?activeTab=Working%20groups) will be used to facilitate future conversations around this results. Secondary to this is the identification of minimum reporting standards for wastewater based epidemiology (MIWPE). A formal statement from the community through scientific consortiums or publications could established MIWBE for future publications and this data could be captured as part of the SRA/ENA upload process. 
 
 
 ## Acknowledgements
