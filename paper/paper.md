@@ -7,7 +7,7 @@ authors:
   - name: Fotis Psomopoulos
     orcid: 0000-0002-8021-9162
     affiliation: 1
- - name: Amy Heather Fitzpatrick
+  - name: Amy Heather Fitzpatrick
     orcid: 0000-0002-1883-0489
     affiliation: 2
   - name: Ivan Topolsky
@@ -19,7 +19,7 @@ authors:
 affiliations:
   - name: Institute of Applied Biosciences, Centre for Research and Technology Hellas, Thessaloniki, Greece
     index: 1
- - name: University College Dublin
+  - name: University College Dublin
     index: 2
   - name: Computational Biology Group, SIB Swiss Institute of Bioinformatics, Basel,Switzerland
     index: 3
