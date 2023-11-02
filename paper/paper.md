@@ -113,23 +113,26 @@ We have compiled a list of critical information that we consider essential for f
 Working with wastewater sequencing data poses a significant challenge: determining the level of detection confidence based on the frequency and coverage of microbial presence. In response to this challenge, we introduce the LIMBO workflow, a versatile tool that allows users and analysts to explore scenarios of low-input microbial presence while evaluating classification accuracy. The workflow includes taxonomic classification, detection of Single Nucleotide Variants (SNVs), and identification of novel taxa, variants, and lineages. The primary outcome is a quantifiable measure of ground-truth as a probability.
 
 ## Case Study: Antimicrobial Resistance Detection
+
 In this prototype, we focus on the application of LIMBO to shotgun metagenomics sequencing of wastewater for Antimicrobial Resistance (AMR) detection.
+
 ### Simulation of HTS Data
 
-    Use a synthetic simulation tool such as MeSS ([@mess_2023]) or NEAT ([@neat_2016]) to simulate High-Throughput Sequencing (HTS) data.
+> Use a synthetic simulation tool such as MeSS ([@mess_2023]) or NEAT ([@neat_2016]) to simulate High-Throughput Sequencing (HTS) data.
 
 ### Replicate Generation
 
-    Optionally, generate multiple replicates from the same input set using a normal distribution and a standard deviation parameter.
+> Optionally, generate multiple replicates from the same input set using a normal distribution and a standard deviation parameter.
 
 ### Post Sequencing Processing
 
-    Depending on the type of sequencing input (e.g., shotgun metagenomics), apply the appropriate post-sequencing processing methods, such as alignment approaches and SPAdes assembly.
-    Conduct end-point detection of AMR genes and plasmids using tools like AMRFinderPlus, Abricate, and CARD.
+> Depending on the type of sequencing input (e.g., shotgun metagenomics), apply the appropriate post-sequencing processing methods, such as alignment approaches and SPAdes assembly.
+
+> Conduct end-point detection of AMR genes and plasmids using tools like AMRFinderPlus, Abricate, and CARD.
 
 ### Output
 
-    Obtain the probability of successfully obtaining ground-truth data.
+> Obtain the probability of successfully obtaining ground-truth data.
 
 ### Justification:
 
