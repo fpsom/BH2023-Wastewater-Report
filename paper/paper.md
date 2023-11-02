@@ -23,7 +23,7 @@ affiliations:
     index: 2
   - name: Computational Biology Group, SIB Swiss Institute of Bioinformatics, Basel,Switzerland
     index: 3
- - name: European Commission, Joint Research Centre (JRC), Ispra, Italy
+  - name: European Commission, Joint Research Centre (JRC), Ispra, Italy
     index: 4
 date: 3 November 2023
 cito-bibliography: paper.bib
@@ -38,7 +38,6 @@ git_url: https://github.com/fpsom/BH2023-Wastewater-Report
 # bottom of the generated paper (typically the first two authors):
 authors_short: Fotis Psomopoulos & Amy H. Fitzpatrick \emph{et al.}
 ---
-
 
 <!--
 
