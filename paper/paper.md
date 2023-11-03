@@ -204,8 +204,8 @@ We started to test the possibility of using NEAT, a synthetic simulation tool, t
 **Figure 1**: NEAT results. Labels: Input(LR/LR+MN)_Specie(LR/MN)_CoverageRequested(10/100)_Targeted(T/N). A) Coverage results with respect to Coverage requested. Mean Coverage was evaluated with the samtools coverage command from the SAMtools toolkit. B) Reads total counts per dataset as evaluated by samtools flagstat. 
 
 
-Input|Specie|Targeted|Nreads|CoveredBases (Kbp)|PercCovered|Cvalue|MeanCoverage|MeanBaseQ|MeanMapQ|HistBinWidth (bp)|HistoMaxBin (%)
------|------}--------|------|------------------|-----------|------|------------|---------|--------|-----------------|----------------
+Input|Specie|Targeted|Nreads|CoveredBases (Kbp)|PercCovered|Cvalue|MeanCoverage|MeanBaseQ|MeanMapQ|HistBinWidth (bp)|HistoMaxBin
+-----|------}--------|------|------------------|-----------|------|------------|---------|--------|-----------------|-----------
 LR+MN|MN|Yes|930|25.7|85.92|100|4.66|34.3|60|139|100
 LR+MN|LR|Yes|104|5.6|4.349|100|0.121|34.3|60|603|97.181
 LR+MN|MN|Yes|58|11.2|37.3|10|0.485|34.3|60|139|100
