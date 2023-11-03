@@ -113,12 +113,22 @@ We have compiled a list of critical information that we consider essential for f
 Working with wastewater sequencing data poses a significant challenge: determining the level of detection confidence based on the frequency and coverage of microbial presence. In response to this challenge, we introduce the LIMBO workflow, a versatile tool that allows users and analysts to explore scenarios of low-input microbial presence while evaluating classification accuracy. The workflow includes taxonomic classification, detection of Single Nucleotide Variants (SNVs), and identification of novel taxa, variants, and lineages. The primary outcome is a quantifiable measure of ground-truth as a probability.
 
 ## Case Study: Antimicrobial Resistance Detection
-
 In this prototype, we focus on the application of LIMBO to shotgun metagenomics sequencing of wastewater for Antimicrobial Resistance (AMR) detection.
 
 ### Simulation of HTS Data
 
-> Use a synthetic simulation tool such as MeSS ([@mess_2023]) or NEAT ([@neat_2016]) to simulate High-Throughput Sequencing (HTS) data.
+Use a synthetic simulation tool such as MeSS ([@mess_2023]) or NEAT ([@neat_2016]) to simulate High-Throughput Sequencing (HTS) data.
+
+We _in-silico_ simulated 5 datasets using NEAT (v.3.2). 2 datasets were composed by only E. coli (LR882973.1, abbreviated with LR) reads while the remaining 3 datasets were composed by a mixed population or reads belonging to both E.coli and SARS-CoV-2 (MN908947.3, abbreviated with MN). Full list of parameters used are shown in the table below. To simulate targeted sequencing for SARS-CoV-2 samples, a bed file containing the ARTIC v.3 amplicon panel was used. To simulate a targeted sequencing approach for E. Coli, random regions were selected.
+
+InputSpecie|TargetedCvalue|ReadLength|FragmentLength|FragmentSD
+LR+MN|T|100|150|500|5
+LR+MN|T|10|150|500|5
+LR+MN|N|10|150|500|5
+LR|N|100|150|500|5
+LR|T|100|150|500|5
+
+Raw reads were next mapped vs the relative reference genomes. Metrics and statistics were evaluated with the SAMtools toolkit (samtools coverage, samtools depth).
 
 ### Replicate Generation
 
@@ -143,11 +153,11 @@ The LIMBO workflow addresses a critical need in the field of wastewater based ep
 ## Metadata survey (preliminary) analysis
 
 The survey was circulated across various networks, including the [ELIXIR 
-Wastewater Surveillance Working Group](https://www.covid19dataportal.org/partners?activeTab=Working%20groups), as well as through social media, receiving approx. 21 responses within 48 hours. A preliminary analysis of these results yield the following insights:
+Wastewater Surveillance Working Group](https://www.covid19dataportal.org/partners?activeTab=Working%20groups), as well as through social media, receiving approx. 25 responses within 48 hours. A preliminary analysis of these results yield the following insights:
 
 1. There is significant variation in the perception of the significance of the various metadata fields, with the vast majority of them fluctuating between **necessary** and **optional**.
-2. `Collection date` (100%), `Geographic location (country and/or sea)` (80.95%) and `Sewage type Description` (80.95%) had the strongest indicators, with over 80% of the responses identifying them as **necessary**.
-3. No metadata were consistently identified as **not required**. `Sample storage location` had the strongest response in this category with 42.86% responding as such, followed by `Sample transportation time` (38.10%), `Receipt date` (33.33%), `Sample transportation date` (28.57%) and `Sample transportation temperature` (19.05%).
+2. `Collection date` (100%), `Geographic location (country and/or sea)` (80%) and `Sewage type Description` (80%) had the strongest indicators, with over 80% of the responses identifying them as **necessary**.
+3. No metadata were consistently identified as **not required**. `Sample storage location` had the strongest response in this category with 44% responding as such, followed by `Sample transportation time` (32%), `Receipt date` (32%) and `Sample transportation date` (28%).
 
 Finally, the following additional metadata were suggested (grouped conceptually per theme):
 
@@ -182,11 +192,53 @@ Finally, the following additional metadata were suggested (grouped conceptually 
 - `raw dataset embargo: if raw dataset should be openly shared only after some embargo date: optional`
 - `quality_flag: possibility to flag entries as low quality/invalid:optional`
 
+## LIMBO 
+
+### NEAT HTS simulation tool
+
+We started to test the possibility of using NEAT, a synthetic simulation tool, to create in-silico wastewater datasets. In particular, we focused our attention on the possibility on simulating targeted sequencing approaches while using multifasta files as input. We evaluated the ability of NEAT to produce the requested coverage values under several conditions (presence/absence of targeted data, presence of single/multiple species as input). We found that NEAT did not result in the expected coverage values when a targeted sequencing approach was simulated, with both single or multiple species used as input.
+
+
+![NEAT Results](NEAT-Results.png "NEAT Results")
+**Figure 1**: NEAT results. Labels: Input(LR/LR+MN)_Specie(LR/MN)_CoverageRequested(10/100)_Targeted(T/N). A) Coverage results with respect to Coverage requested. Mean Coverage was evaluated with the samtools coverage command from the SAMtools toolkit. B) Reads total counts per dataset as evaluated by samtools flagstat. 
+
+
+
+Input|Specie|Targeted|Nreads|CoveredBases (Kbp)|PercCovered|Cvalue|MeanCoverage|MeanBaseQ|MeanMapQ|HistBinWidth (bp)|HistoMaxBin (%)
+LR+MN|MN|Yes|930|25.7|85.92|100|4.66|34.3|60|139|100
+LR+MN|LR|Yes|104|5.6|4.349|100|0.121|34.3|60|603|97.181
+LR+MN|MN|Yes|58|11.2|37.3|10|0.485|34.3|60|139|100
+LR+MN|LR|Yes|6|1.5|1.157|10|0.0116|34.4|60|603|73.466
+LR+MN|MN|No|5090|129.1|99.96|10|9.85|34.3|59.6|603|100
+LR+MN|LR|No|1224|29.5|98.7|10|10.2|34.3|60|139|100
+LR|LR|No|84826|129.1|99.99|100|98.5|34.3|59.4|603|100
+LR|LR|Yes|104|5.6|4.302|100|0.121|34.3|60|603|98.01
+[**Table 1**: Samtools coverage results are displayed for each NEAT-created dataset. Results are split by species.][table1]
+
+
+### MeSS HTS simulation 
+
+The Metagenomic Sequence Simulator (MeSS) is a snakemake workflow used for simulating metagenomic mock communities. We tried to simulate HTS data with MeSS and encouterered some specific challenges. First and foremost Challenges:
+- Documentation is lacking, template and example have diverged from code. No configuation validation
+- Does not rely on snakemake’s automatic handling of dependencies
+- MeSS is based on the taxonomic queries which do not fit the needs for Virus specific sequencing, need a more flexible approach for data input. 
+- Only permits fetching from NCBI, missing some important QC criteria in other databases such as GTDB
+
+
+- Does it work? 
+  - It runs on each species present and assembles and shuffles results to an output file
+  - Number of reads do fit user request
+
+### Incorporating MeSS within user defined metagenomic survey 
+
+- New generator of input data for MeSS 
+- Make a prototype that can take a arbitrary set of queries and avoid NCBI tax ID issues
+- Outputtting fastq files, not including their reporting
+
 
 # Discussion 
 
-With regards to wastewater sequencing archives metadata, users have a variety opinions on the necessary or optional data points. The issue is to bring data sharers on board with any updates to required metadata as different studies may not collect the same data points. Moving forward, the [ELIXIR Wastewater Surveillance Working Group working group](https://www.covid19dataportal.org/partners?activeTab=Working%20groups) will be used to facilitate future conversations around this results. Secondary to this is the identification of minimum reporting standards for wastewater based epidemiology (MIWPE). A formal statement from the community through scientific consortiums or publications could established MIWBE for future publications and this data could be captured as part of the SRA/ENA upload process. 
-
+With regards to wastewater sequencing archives metadata, users have a variety opinions on the necessary or optional data points. The issue is to bring data sharers on board with any updates to required metadata as different studies may not collect the same data points. The Elixir Wastewater COVID-19 working group will be used to facilitate future conversations around this results? Secondary to this is the identification of minimum reporting standards for wastewater based epidemiology (MIWPE). A formal statement from the community through scientific consortiums or publications could established MIWBE for future publications and this data could be captured as part of the SRA/ENA upload process. 
 
 ## Acknowledgements
 
