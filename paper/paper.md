@@ -205,7 +205,7 @@ We started to test the possibility of using NEAT, a synthetic simulation tool, t
 
 
 Input|Specie|Targeted|Nreads|CoveredBases (Kbp)|PercCovered|Cvalue|MeanCoverage|MeanBaseQ|MeanMapQ|HistBinWidth (bp)|HistoMaxBin (%)
------|------}-------|-------|------------------|-----------|------|------------|---------|--------|-----------------|--------
+-----|------}--------|------|------------------|-----------|------|------------|---------|--------|-----------------|----------------
 LR+MN|MN|Yes|930|25.7|85.92|100|4.66|34.3|60|139|100
 LR+MN|LR|Yes|104|5.6|4.349|100|0.121|34.3|60|603|97.181
 LR+MN|MN|Yes|58|11.2|37.3|10|0.485|34.3|60|139|100
@@ -214,6 +214,7 @@ LR+MN|MN|No|5090|129.1|99.96|10|9.85|34.3|59.6|603|100
 LR+MN|LR|No|1224|29.5|98.7|10|10.2|34.3|60|139|100
 LR|LR|No|84826|129.1|99.99|100|98.5|34.3|59.4|603|100
 LR|LR|Yes|104|5.6|4.302|100|0.121|34.3|60|603|98.01
+
 [**Table 1**: Samtools coverage results are displayed for each NEAT-created dataset. Results are split by species.][table1]
 
 
