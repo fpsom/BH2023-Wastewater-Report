@@ -122,6 +122,7 @@ Use a synthetic simulation tool such as MeSS ([@mess_2023]) or NEAT ([@neat_2016
 We _in-silico_ simulated 5 datasets using NEAT (v.3.2). 2 datasets were composed by only E. coli (LR882973.1, abbreviated with LR) reads while the remaining 3 datasets were composed by a mixed population or reads belonging to both E.coli and SARS-CoV-2 (MN908947.3, abbreviated with MN). Full list of parameters used are shown in the table below. To simulate targeted sequencing for SARS-CoV-2 samples, a bed file containing the ARTIC v.3 amplicon panel was used. To simulate a targeted sequencing approach for E. Coli, random regions were selected.
 
 InputSpecie|TargetedCvalue|ReadLength|FragmentLength|FragmentSD
+-----------|--------------|----------|--------------|----------
 LR+MN|T|100|150|500|5
 LR+MN|T|10|150|500|5
 LR+MN|N|10|150|500|5
@@ -203,8 +204,8 @@ We started to test the possibility of using NEAT, a synthetic simulation tool, t
 **Figure 1**: NEAT results. Labels: Input(LR/LR+MN)_Specie(LR/MN)_CoverageRequested(10/100)_Targeted(T/N). A) Coverage results with respect to Coverage requested. Mean Coverage was evaluated with the samtools coverage command from the SAMtools toolkit. B) Reads total counts per dataset as evaluated by samtools flagstat. 
 
 
-
 Input|Specie|Targeted|Nreads|CoveredBases (Kbp)|PercCovered|Cvalue|MeanCoverage|MeanBaseQ|MeanMapQ|HistBinWidth (bp)|HistoMaxBin (%)
+-----|------}-------|-------|------------------|-----------|------|------------|---------|--------|-----------------|--------
 LR+MN|MN|Yes|930|25.7|85.92|100|4.66|34.3|60|139|100
 LR+MN|LR|Yes|104|5.6|4.349|100|0.121|34.3|60|603|97.181
 LR+MN|MN|Yes|58|11.2|37.3|10|0.485|34.3|60|139|100
