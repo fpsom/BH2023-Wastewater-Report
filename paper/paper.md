@@ -214,7 +214,6 @@ LR+MN|MN|No|5090|129.1|99.96|10|9.85|34.3|59.6|603|100
 LR+MN|LR|No|1224|29.5|98.7|10|10.2|34.3|60|139|100
 LR|LR|No|84826|129.1|99.99|100|98.5|34.3|59.4|603|100
 LR|LR|Yes|104|5.6|4.302|100|0.121|34.3|60|603|98.01
-
 [**Table 1**: Samtools coverage results are displayed for each NEAT-created dataset. Results are split by species.][table1]
 
 
